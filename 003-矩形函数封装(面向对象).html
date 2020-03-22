@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="cvs" width="500" height="500" style="background-color: #ccc;"></canvas>
+    <script>
+
+
+        function Rect(ctx, startX, startY, width, height, lineWidth, strokeStyle) {
+            this.ctx = ctx;
+            this.startX = startX;
+            this.startY = startY;
+            this.width = width;
+            this.height = height;
+            this.lineWidth = lineWidth;
+            this.strokeStyle = strokeStyle;
+        }
+        Rect.prototype.draw = function () {
+            this.ctx.beginPath();
+            this.ctx.moveTo(this.startX, this.startY);
+            this.ctx.lineTo(this.startX + this.width, this.startY);
+            this.ctx.lineTo(this.startX + this.width, this.startY + this.height);
+            this.ctx.lineTo(this.startX, this.startY + this.height);
+            // 闭合路径
+            this.ctx.closePath();
+            // 设置线宽
+            this.ctx.lineWidth = this.lineWidth;
+            // 设置线条颜色
+            this.ctx.strokeStyle = this.strokeStyle;
+            this.ctx.stroke();
+
+        }
+        var cvs = document.getElementById('cvs');
+        var ctx = cvs.getContext('2d');
+        var r = new Rect(ctx, 10, 10, 100, 100, 10, 'yellow');
+        r.draw();
+        var r2 = new Rect(ctx, 100, 100, 100, 100, 10, 'blue');
+        r2.draw();
+    </script>
+</body>
+
+</html>
