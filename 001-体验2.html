@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #cav {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="cav" width="300px" height="150px"></canvas>
+    <script>
+
+        var cvs = document.getElementById('cav');
+        var ctx = cvs.getContext('2d');
+        // ctx.strokeStyle =  css任意的颜色表示
+        ctx.strokeStyle = '#1acd7e';
+
+        // 绘制一个等腰三角形
+        ctx.moveTo(300,0);  // 设置起始点的位置
+
+        ctx.lineTo(300,150);
+        ctx.lineTo(150,75);
+        ctx.lineTo(300,0);
+        // 设置线条的宽度
+        ctx.lineWidth = 10;
+        // 闭合路径
+        ctx.closePath(); // 解决锯齿问题
+        ctx.stroke();
+
+        /* var c = document.getElementById("cav");
+        var ctx = c.getContext("2d");
+        ctx.moveTo(0, 0);
+        ctx.lineTo(200, 100);
+        ctx.stroke(); */
+    </script>
+</body>
+
+</html>
