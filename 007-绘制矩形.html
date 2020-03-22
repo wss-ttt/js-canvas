@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="cvs" width="400" height="400"></canvas>
+    <script>
+        var cvs = document.getElementById('cvs');
+        var ctx = cvs.getContext("2d");
+        rect(10, 10, 100, 100, 10, 'yellow');
+        rect(150, 150, 100, 100, 10, 'red');
+
+        function rect(startX, startY, width, height, lineWidth, strokeStyle) {
+            ctx.beginPath()
+            // 设置起始位置
+            ctx.moveTo(startX, startY);
+            ctx.lineTo(startX + width, startY);
+            ctx.lineTo(startX + width, startY + height);
+            ctx.lineTo(startX, startY + height);
+            // 闭合路径
+            ctx.closePath();
+            // 设置线宽
+            ctx.lineWidth = lineWidth;
+            // 设置线条颜色
+            ctx.strokeStyle = strokeStyle;
+            ctx.stroke();
+        }
+    </script>
+</body>
+
+</html>
