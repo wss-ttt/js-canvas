@@ -13,6 +13,8 @@
         var cvs = document.getElementById('cvs');
         var ctx = cvs.getContext('2d');
         function rect(startX, startY, width, height, lineWidth, strokeStyle) {
+            // 避免重绘
+            ctx.beginPath();
             // 设置起始位置
             ctx.moveTo(startX, startY);
             ctx.lineTo(startX + width, startY);
@@ -28,8 +30,6 @@
         }
         // 绘制一个矩形
         rect(10, 10, 60, 60, 4, 'blue');
-        // 避免重绘
-        ctx.beginPath();
         // 再来绘制一个矩形
         rect(100, 10, 100, 100, 6, 'yellow');
     </script>
