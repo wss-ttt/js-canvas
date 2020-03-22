@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        canvas{
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+     <canvas id="cav" width="400px" height="400px"></canvas>
+    <script>
+        var cvs = document.getElementById('cav');
+        var ctx = cvs.getContext('2d');
+
+        // 设置起点 
+        ctx.moveTo(0,0);
+        ctx.lineTo(400,400);
+        ctx.lineTo(0,400);
+        // 闭合路径
+        ctx.closePath();  // 闭合路劲 所以最后一个路径可以不用画
+        ctx.lineWidth=10;  // 设置线条宽度
+        ctx.strokeStyle = 'yellow'; // 设置线条的颜色
+        ctx.stroke();
+    </script>
+</body>
+</html>
