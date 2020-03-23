@@ -17,6 +17,8 @@
     <script>
         var cvs = document.getElementById('cvs');
         var ctx = cvs.getContext("2d");
+        // 设置线宽
+        ctx.lineWidth = 2;
         // 坐标轴与画布之间的间距
         var padding = {
             top: 20,
@@ -45,24 +47,30 @@
             y: cvs.height - padding.bottom
         }
         // 绘制坐标轴的x轴线和y轴线
+        ctx.beginPath();
         ctx.moveTo(vertexTop.x, vertexTop.y);
         ctx.lineTo(origin.x, origin.y);
         ctx.lineTo(vertexRight.x, vertexRight.y);
         ctx.stroke();
         // 绘制定点箭头
+        ctx.beginPath();
         ctx.moveTo(vertexTop.x, vertexTop.y);
-        // 绘制左边的
         ctx.lineTo(vertexTop.x - arrrow.width / 2, vertexTop.y + arrrow.height);
-        ctx.moveTo(vertexTop.x, vertexTop.y);
-        // 绘制右边的
+        // ctx.moveTo(vertexTop.x, vertexTop.y);
+        ctx.lineTo(vertexTop.x, vertexTop.y + arrrow.height / 2);
         ctx.lineTo(vertexTop.x + arrrow.width / 2, vertexTop.y + arrrow.height);
-        ctx.stroke();
+        ctx.closePath();   // 闭合路径
+        ctx.fill();
+
         // 绘制右顶点箭头
+        ctx.beginPath();
         ctx.moveTo(vertexRight.x, vertexRight.y);
         ctx.lineTo(vertexRight.x - arrrow.height, vertexRight.y - arrrow.width / 2);
-        ctx.moveTo(vertexRight.x, vertexRight.y);
+        // ctx.moveTo(vertexRight.x, vertexRight.y);
+        ctx.lineTo(vertexRight.x - arrrow.height / 2, vertexRight.y);
         ctx.lineTo(vertexRight.x - arrrow.height, vertexRight.y + arrrow.width / 2);
-        ctx.stroke();
+        ctx.closePath();   // 闭合路径
+        ctx.fill();
     </script>
 </body>
 
