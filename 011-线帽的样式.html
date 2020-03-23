@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="cvs" width="500" height="500"></canvas>
+    <script>
+        var cvs = document.getElementById('cvs');
+        var ctx = cvs.getContext("2d");
+        // 设置线条的宽度(这样所有的线条的宽度都是10)
+        ctx.lineWidth = 10;
+        /*
+        设置线帽的样式
+        ctx.lineCap = 'butt' | 'round' | 'square' 
+        butt:是默认值 没什么改变
+        round:线头是圆的
+        square:线两端各添加线宽的一半
+        */
+        // 我们绘制三条直线
+        // 第一条
+        ctx.moveTo(50, 50);
+        ctx.lineTo(350, 50);
+        ctx.stroke();
+
+        // 第二条
+        ctx.beginPath();
+        ctx.moveTo(50, 70);
+        ctx.lineTo(350, 70);
+        ctx.lineCap = 'round';
+        ctx.stroke();
+
+        // 第三条
+        ctx.beginPath();
+        ctx.moveTo(50, 90);
+        ctx.lineTo(350, 90);
+        ctx.lineCap = 'square';
+        ctx.stroke();
+    </script>
+</body>
+
+</html>
