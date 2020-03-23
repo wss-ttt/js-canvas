@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="cvs" width="500" height="500"></canvas>
+    <script>
+        var cvs = document.getElementById('cvs');
+        var ctx = cvs.getContext("2d");
+        // 设置线条的宽度(这样所有的线条的宽度都是10)
+        ctx.lineWidth = 10;
+        /*
+        设置线交点的样式
+        ctx.lineJoin = 'meter' | 'round' | 'bevel' 
+        meter:是默认值  两边向外延伸相交为尖尖角
+        round:是圆头
+        bevel:两边相连为一个斜面
+        */
+        // 我们绘制三条直线
+        // 第一条
+        ctx.moveTo(50, 50);
+        ctx.lineTo(100,150);
+        ctx.lineTo(150,50);
+        ctx.lineJoin = 'meter';
+        ctx.stroke();
+
+        // 第二条
+        ctx.beginPath();
+        ctx.moveTo(50, 150);
+        ctx.lineTo(100,250);
+        ctx.lineTo(150,150);
+        ctx.lineJoin = 'round';
+        ctx.stroke();
+
+        // 第三条
+        ctx.beginPath();
+        ctx.moveTo(50, 250);
+        ctx.lineTo(100,350);
+        ctx.lineTo(150,250);
+        ctx.lineJoin = 'bevel';
+        ctx.stroke();
+    </script>
+</body>
+
+</html>
