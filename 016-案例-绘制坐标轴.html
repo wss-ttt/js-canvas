@@ -80,7 +80,29 @@
          * 点y轴:原点y坐标  -  y
          * 
         */
-        ctx.fillRect(origin.x + 100, origin.y - 100, 2, 2);
+        // ctx.fillRect(origin.x + 100, origin.y - 100, 2, 2);
+
+        // 在坐标轴中绘制 4个点 
+        var data = [
+            [100, 100],
+            [220, 200],
+            [300, 340],
+            [400, 450]
+        ];
+        // 绘制点
+        data.forEach(function (item, index) {
+            ctx.fillRect(origin.x + item[0], origin.y - item[1], 2, 2);
+        });
+        // 根据点绘制折线
+        // 开始路径
+        ctx.beginPath();
+        data.forEach(function (item, index) {
+            // 注意:这里为什么要加 1
+            // 加的点的宽度和高度的一半,也就是我们需要连接点的中心点
+            // 其实我们的线条是往右下方偏移了
+            ctx.lineTo(origin.x + item[0] + 1, origin.y - item[1] + 1);
+        });
+        ctx.stroke();
     </script>
 </body>
 
