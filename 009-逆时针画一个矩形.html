@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="cvs" width="500" height="500"></canvas>
+    <script>
+        var cvs = document.getElementById('cvs');
+        var ctx = cvs.getContext("2d");
+        // 顺时针画  200x200的正方形
+        ctx.moveTo(50,50);
+        ctx.lineTo(250,50);
+        ctx.lineTo(250,250);
+        ctx.lineTo(50,250);
+        ctx.closePath();
+        ctx.lineWidth = 10;
+        ctx.strokeStyle = 'red';
+        ctx.stroke();
+
+        // 逆时针画   100 x 100的正方形
+        // 起始位置
+        // ctx.beginPath();
+        ctx.moveTo(100,100);
+        // 绘制路径
+        ctx.lineTo(100,200);
+        ctx.lineTo(200,200);
+        ctx.lineTo(200,100);
+        // 路径闭合
+        ctx.closePath();
+        ctx.lineWidth = 10;
+        ctx.strokeStyle = 'yellow';
+        // 先填充 
+        ctx.fill();
+        // 后描边
+        ctx.stroke();
+
+    </script>
+</body>
+
+</html>
