@@ -71,6 +71,16 @@
         ctx.lineTo(vertexRight.x - arrrow.height, vertexRight.y + arrrow.width / 2);
         ctx.closePath();   // 闭合路径
         ctx.fill();
+
+        // 相对于原点origin 来绘制一个点(100,100)
+
+        /**
+         * 在坐标轴中指定位置画点,(x,y),坐标算法:
+         * 点x轴: 原点x坐标 +  x 
+         * 点y轴:原点y坐标  -  y
+         * 
+        */
+        ctx.fillRect(origin.x + 100, origin.y - 100, 2, 2);
     </script>
 </body>
 
