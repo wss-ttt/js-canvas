@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="cvs" width="500" height="500"></canvas>
+    <script>
+        /*
+            绘制一个矩形路径
+            ctx.rext(x,y,width,height) 
+        */
+        var cvs = document.getElementById('cvs');
+        var ctx = cvs.getContext("2d");
+        /* ctx.rect(10, 10, 100, 150);
+        ctx.fillStyle = '#1acd7e';
+        ctx.fill(); */
+
+        /*
+            绘制一个描边路径,这个方法不会产生任何的路径
+            ctx.strokeRect(x,y,width,height); 
+        */
+        // ctx.strokeStyle = 'red';
+        // ctx.strokeRect(10, 160, 100, 150);
+
+
+        /*
+            绘制一个填充矩形,这个方法不会产生任何路径
+             ctx.fillRect(x,y,width,height);
+        */
+       ctx.fillStyle = '#1acd7e';
+       ctx.fillRect(120, 160, 100, 150);
+    </script>
+</body>
+
+</html>
