@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            /* background-color: #ccc; */
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="cvs"></canvas>
+    <script>
+        /*
+            绘制线条的机制:
+            1.在绘制线条时候,会向左向右偏移线宽的半,然后进行绘制
+            2.如果线宽为奇数,那么边缘的颜色值,会缩减一半 
+            
+            通常一般设置线宽 为 2 
+        */
+        var cvs = document.getElementById('cvs');
+        var ctx = cvs.getContext("2d");
+        ctx.moveTo(10,10);
+        ctx.lineTo(200,10);
+        ctx.lineWidth = 10;
+        ctx.stroke();
+    </script>
+</body>
+
+</html>
