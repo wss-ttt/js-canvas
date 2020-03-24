@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="cvs" width="500" height="500"></canvas>
+    <script>
+        /**
+         * 设置画线的时候实线和空白的大小
+         * ctx.setLineDash([10,5]); 
+         * 注意,可以任意个值...依次排列
+         * ctx.setLineDash([a,b,c....])
+         * 
+         * **/
+        var cvs = document.getElementById('cvs');
+        var ctx = cvs.getContext("2d");
+        ctx.setLineDash([10,5]);
+        ctx.moveTo(100,100);
+        ctx.lineTo(300,100);
+        ctx.stroke();
+        /**
+         *获取线条绘制规则
+         *ctx.getLineDash()
+        */
+       console.log(ctx.getLineDash()); // [10,5]
+    </script>
+</body>
+
+</html>
