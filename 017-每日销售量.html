@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="cvs" width="500" height="500"></canvas>
+    <script>
+        var cvs = document.getElementById('cvs');
+        var ctx = cvs.getContext("2d");
+        // 设置线宽
+        ctx.lineWidth = 2;
+        // 坐标轴与画布之间的间距
+        var padding = {
+            top: 20,
+            right: 20,
+            bottom: 20,
+            left: 20
+        }
+        // 坐标轴箭头的宽度和高度
+        var arrrow = {
+            width: 12,
+            height: 20
+        }
+        // 顶点的坐标值
+        var vertexTop = {
+            x: padding.left,
+            y: padding.top
+        };
+        // 原点的坐标值
+        var origin = {
+            x: padding.left,
+            y: cvs.height - padding.bottom
+        }
+        // 右顶点的坐标值
+        var vertexRight = {
+            x: cvs.width - padding.right,
+            y: cvs.height - padding.bottom
+        }
+        // 绘制坐标轴的x轴线和y轴线
+        ctx.beginPath();
+        ctx.moveTo(vertexTop.x, vertexTop.y);
+        ctx.lineTo(origin.x, origin.y);
+        ctx.lineTo(vertexRight.x, vertexRight.y);
+        ctx.stroke();
+        // 绘制定点箭头
+        ctx.beginPath();
+        ctx.moveTo(vertexTop.x, vertexTop.y);
+        ctx.lineTo(vertexTop.x - arrrow.width / 2, vertexTop.y + arrrow.height);
+        // ctx.moveTo(vertexTop.x, vertexTop.y);
+        ctx.lineTo(vertexTop.x, vertexTop.y + arrrow.height / 2);
+        ctx.lineTo(vertexTop.x + arrrow.width / 2, vertexTop.y + arrrow.height);
+        ctx.closePath();   // 闭合路径
+        ctx.fill();
+
+        // 绘制右顶点箭头
+        ctx.beginPath();
+        ctx.moveTo(vertexRight.x, vertexRight.y);
+        ctx.lineTo(vertexRight.x - arrrow.height, vertexRight.y - arrrow.width / 2);
+        // ctx.moveTo(vertexRight.x, vertexRight.y);
+        ctx.lineTo(vertexRight.x - arrrow.height / 2, vertexRight.y);
+        ctx.lineTo(vertexRight.x - arrrow.height, vertexRight.y + arrrow.width / 2);
+        ctx.closePath();   // 闭合路径
+        ctx.fill();
+
+        // 相对于原点origin 来绘制一个点(100,100)
+
+        /**
+         * 在坐标轴中指定位置画点,(x,y),坐标算法:
+         * 点x轴: 原点x坐标 +  x 
+         * 点y轴:原点y坐标  -  y
+         * 
+        */
+        // ctx.fillRect(origin.x + 100, origin.y - 100, 2, 2);
+
+        // 在坐标轴中绘制 4个点 
+        var data = [
+            100, 120, 80, 150, 300, 78, 80, 250, 90, 45
+        ];
+        // 绘制点
+        data.forEach(function (val, index) {
+            // 这样x轴上每个点的间距是相等的
+            ctx.fillRect(origin.x + index * 40, origin.y - val, 4, 4);
+        });
+        // 根据点绘制折线
+        // 开始路径
+        ctx.beginPath();
+        data.forEach(function (val, index) {
+            ctx.lineTo(origin.x + index * 40 + 2, origin.y - val + 2);
+        });
+        ctx.stroke();
+    </script>
+</body>
+
+</html>
