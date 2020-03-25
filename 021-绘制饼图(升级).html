@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="cvs" width="500" height="500"></canvas>
+    <script src="js/pie-2.0.js"></script>
+    <script>
+        var cvs = document.getElementById('cvs');
+        var ctx = cvs.getContext("2d");
+        var pie = new Pie(ctx, 200, 200, 100, [{
+            name: '乔峰',
+            value: 100
+        }, {
+            name: '杨过',
+            value: 200
+        }, {
+            name: '小龙女',
+            value: 300
+        },{
+            name:'张三',
+            value:150
+        },{
+            name:'刘备',
+            value:250
+        },{
+            name:'张飞',
+            value:350
+        }]);
+        pie.draw();
+
+    </script>
+</body>
+
+</html>
