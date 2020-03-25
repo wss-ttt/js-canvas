@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="cvs" width="500" height="500"></canvas>
+    <script>
+        var cvs = document.getElementById('cvs');
+        var ctx = cvs.getContext("2d");
+        // 设置圆的坐标及半径大小
+        var x = 200, y = 200, r = 80;
+        // 1.绘制一个圆
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // 2.在圆上60度地方绘制一个点
+        /**
+         *该点的坐标算法 
+         * x = 圆心x + r * Math.cos(angleToRadian(60))
+         * y = 圆心y + r * Math.sin(angleToRadian(60)) 
+         * 
+        */
+        var pointtAngle = 60;
+        var pointX = x + r * Math.cos(angleToRadian(pointtAngle));
+        var pointY = y + r * Math.sin(angleToRadian(pointtAngle));
+        ctx.beginPath();
+        ctx.arc(pointX, pointY, 6, 0, Math.PI * 2);
+        ctx.fill();
+
+        // 把角度转换为弧度
+        function angleToRadian(angle) {
+            return Math.PI / 180 * angle;
+        }
+    </script>
+</body>
+
+</html>
