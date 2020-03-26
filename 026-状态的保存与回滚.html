@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="cvs" width="500" height="500"></canvas>
+    <script>
+        var cvs = document.getElementById('cvs');
+        var ctx = cvs.getContext("2d");
+
+        // 保存一次状态
+        ctx.save();
+        // 修改状态
+        ctx.strokeStyle = 'red';
+        ctx.lineWidth = 10;
+        // 再来保存一次状态
+        ctx.save();
+
+        // 绘制一条直线
+        ctx.beginPath();
+        ctx.moveTo(10, 100);
+        ctx.lineTo(300, 100);
+        ctx.stroke();
+
+        // 再来修改一次状态
+        ctx.strokeStyle = 'green';
+        ctx.lineWidth = 5;
+        // 绘制一条直线
+        ctx.beginPath();
+        ctx.moveTo(10, 150);
+        ctx.lineTo(300, 150);
+        ctx.stroke();
+
+        // 绘制一条直线
+        ctx.beginPath();
+        ctx.moveTo(10, 200);
+        ctx.lineTo(300, 200);
+        ctx.stroke();
+
+        // 状态回滚
+        ctx.restore();
+        ctx.beginPath();
+        ctx.moveTo(10, 250);
+        ctx.lineTo(300, 250);
+        ctx.stroke();
+
+        // 再来滚回一次
+        ctx.restore();
+        ctx.beginPath();
+        ctx.moveTo(10, 300);
+        ctx.lineTo(300, 300);
+        ctx.stroke();
+    </script>
+</body>
+
+</html>
