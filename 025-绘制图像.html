@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="cvs" width="500" height="500"></canvas>
+    <img src="images/1.jpg" alt="">
+    <script>
+        var cvs = document.getElementById('cvs');
+        var ctx = cvs.getContext("2d");
+        var img = document.querySelector('img');
+
+        // 第一种方法 (3个参数) 必须要放在img的onload事件中去
+        // 把图像绘制到指定的坐标位置去.
+        /* img.onload = function(){
+            ctx.drawImage(img, 10, 10);
+        } */
+
+        // 第二种方法(5个参数)  
+        // 把图像绘制到指定的坐标位置去,并指定其大小
+        // 指定图片的宽度和高度
+        /* img.onload = function(){
+            ctx.drawImage(img, 10, 10,200,100);
+        } */
+
+        // 第三种方法(9个参数)
+        // 把裁剪的部分图像(x,y,width,height)绘制到指定的坐标位置去,并指定其大小
+        img.onload = function(){
+            console.log(this.width,this.height);
+            ctx.drawImage(img, 
+            0,0,500,200,// x,y,width,height
+            0, 0,500,200);
+        }
+    </script>
+</body>
+
+</html>
