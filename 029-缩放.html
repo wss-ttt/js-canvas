@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="cvs" width="500" height="500"></canvas>
+    <script>
+        /**
+         *  缩放坐标轴 :
+         *   ctx.scale(x轴缩放的比值,y轴缩放的比值)
+         *  注意:
+         *      1.已绘制的图形不会受影响,只会影响后面绘制的图像
+         *      2.缩放也会累加(在上一次的位置进行旋转)
+        */
+        var cvs = document.getElementById('cvs');
+        var ctx = cvs.getContext("2d");
+        // 坐标轴平移了 (100,100)
+        ctx.translate(100,100);
+        ctx.fillStyle = '#1acd7e';
+        ctx.fillRect(0,0,100,100);
+
+        ctx.fillStyle = '#000';
+        // 宽度和高度都缩小了一倍
+        ctx.scale(0.5,0.5);
+        ctx.fillRect(0,0,100,100);
+        
+        // 再来缩小一倍
+        ctx.scale(0.5,0.5);
+        ctx.fillStyle = 'blue';
+        ctx.fillRect(0,0,100,100);
+
+    </script>
+</body>
+
+</html>

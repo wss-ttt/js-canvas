@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="cvs" width="500" height="500"></canvas>
+    <script>
+        /**
+         *  旋转坐标轴 :
+         *   ctx.rotate(旋转的弧度)
+         *  注意:
+         *      1.已绘制的图形不会受影响,只会影响后面绘制的图像
+         *      2.旋转的弧度会累加(在上一次的位置进行旋转)
+        */
+        var cvs = document.getElementById('cvs');
+        var ctx = cvs.getContext("2d");
+        // 平移的是坐标轴 不是图形
+        ctx.translate(100,100);
+        ctx.fillStyle = '#1acd7e';
+        ctx.fillRect(0,0,100,100);
+        // 旋转了90度
+        ctx.beginPath();
+        ctx.fillStyle = 'yellow';
+        // 旋转90度
+        // ctx.rotate(Math.PI / 2);
+        // 旋转45度
+        ctx.rotate(Math.PI / 180 * 45);
+        ctx.fillRect(0,0,100,100);
+
+        
+    </script>
+</body>
+
+</html>
