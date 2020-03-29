@@ -51,6 +51,9 @@
 
             // 指定小人移动的速度 
             this.speed = speed || 2;
+
+            // 调用_bind方法
+            this._bind();   // 这样就不用在外部再调用了
         }
 
         // 在Person的原型对象上扩充方法
@@ -140,7 +143,7 @@
         img.onload = function () {
             // 该图片的宽度是 160,一排有4个小人,所以一个小人的宽度是:40
             var person = new Person(ctx, img, 4, 4, 50, 50, 40, 40);
-            person._bind();
+            // person._bind(); // 放在构造函数内部进行调用
             setInterval(function () {
                 // 清除画布
                 ctx.clearRect(0, 0, cvs.width, cvs.height);
