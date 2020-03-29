@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="cvs" width="500" height="500"></canvas>
+    <img src="images/NPCrabbitbaby.png" alt="">
+    <script src="034-person.js"></script>
+    <script>
+
+        var cvs = document.getElementById('cvs');
+        var ctx = cvs.getContext("2d");
+        var img = document.getElementsByTagName('img')[0];
+        img.onload = function () {
+            // 该图片的宽度是 160,一排有4个小人,所以一个小人的宽度是:40
+            var person = new Person(ctx, img, 4, 4, 50, 50, 40, 40);
+            // person._bind(); // 放在构造函数内部进行调用
+            setInterval(function () {
+                // 清除画布
+                ctx.clearRect(0, 0, cvs.width, cvs.height);
+                person.draw();
+                // x轴方向上,4个小图像移动,然后就形成了动画效果
+                person.directionX = ++person.directionX >= person.widthFrame ? 0 : person.directionX;
+                // 
+                person.update();
+            }, 50);
+        }
+    </script>
+</body>
+
+</html>
