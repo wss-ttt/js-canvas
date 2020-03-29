@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <img src="images/1.jpg" alt="">
+    <img src="images/2.jpg" alt="">
+    <img src="images/3.jpg" alt="">
+    <img src="images/4.jpg" alt="">
+    <img src="images/5.jpg" alt="">
+    <div>好好学习 天天向上</div>
+    <script>
+        /**
+         *如何确保所有的图片都加载完毕以后,才执行某个操作了? 
+         * **/
+        var imgs = document.getElementsByTagName('img');
+        window.onload = function () {
+            for (var i = 0; i < imgs.length; i++) {
+                console.log('window.onload', imgs[i].src);
+            }
+        }
+
+        for (var i = 0; i < imgs.length; i++) {
+            imgs[i].onload = function () {
+                console.log('img.onload:', this.src);
+            }
+        }
+
+        function imgLoaded(imgUrl, fn) {
+
+        }
+    </script>
+</body>
+
+</html>
