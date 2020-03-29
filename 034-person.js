@@ -1,0 +1,116 @@
+// 沙箱模式
+(function (w) {
+    /**
+     * constructor { Person } 人构造函数 
+     * param { img: Image } 绘制的图像
+     * param { widthFrame: number } 图像一排有多少个人
+     * param { heightFrame: number } 图像一列有多少个人
+     * param { x: number } 指定人物绘制的x轴坐标,由用户指定
+     * param { y: number } 指定人物绘制的y轴坐标,由用户指定
+     * param { renderWidth: number } 人物绘制时的宽,由用户指定
+     * param { renderHeight: number } 人物绘制时的高,由用户指定
+     * param { speed: number } 控制小人移动的速度
+     * **/
+    function Person(ctx, img, widthFrame, heightFrame, x, y, renderWidth, renderHeight, speed) {
+        this.ctx = ctx;
+        this.img = img;
+        this.widthFrame = widthFrame;
+        this.heightFrame = heightFrame;
+
+        // 图像绘制时的坐标和大小
+        this.x = x;
+        this.y = y;
+        this.renderWidth = renderWidth;
+        this.renderHeight = renderHeight;
+
+        // 求出一个小人的宽度和高度
+        this.width = img.width / widthFrame;
+        this.height = img.height / heightFrame;
+
+        // 当前绘制某个方向的第几帧
+        this.directionX = 0; // 其实就是x轴的方向
+        // 当前行走的方向，默认是第一排的方向
+        this.directionY = 0;  // 其实就是y轴的方向
+
+        // 指定小人移动的速度 
+        this.speed = speed || 2;
+
+        // 调用_bind方法
+        this._bind();   // 这样就不用在外部再调用了
+    }
+
+    // 在Person的原型对象上扩充方法
+    extend(Person.prototype, {
+        // 绘制方法
+        draw: function () {
+            this.ctx.drawImage(this.img,
+                // 裁剪的4个参数
+                this.directionX * this.width, this.directionY * this.height, this.width, this.height,
+                // 绘制图像的4个参数(当裁剪的图像绘制到哪个地方去)
+                this.x, this.y, this.renderWidth, this.renderHeight
+            );
+        },
+        _bind: function () {
+            var self = this;
+            // 给document对象绑定事件
+            document.addEventListener('keydown', function (e) {
+                console.log(e.keyCode);
+                // 根据案件切换行走方向
+                switch (e.keyCode) {
+                    // 37: 左箭头
+                    case 37:
+                        self.directionY = 1;
+                        break;
+                    // 38: 上箭头
+                    case 38:
+                        self.directionY = 3;
+                        break;
+                    // 39: 右箭头
+                    case 39:
+                        self.directionY = 2;
+                        break;
+                    // 40: 下箭头
+                    case 40:
+                        self.directionY = 0;
+                        break;
+                }
+            });
+        },
+        // 更新小人下一帧绘制时的数据
+        update: function () {
+            switch (this.directionY) {
+                // 第一排是向下走的小人
+                case 0:
+                    this.y += this.speed;
+                    // 同理
+                    this.y = this.y > this.ctx.canvas.height ? -this.height : this.y;
+                    break;
+                // 第二排是向左走的小人
+                case 1:
+                    this.x -= this.speed;
+                    // 当小人向左走出画布的时候,
+                    // 从画布的右边再走进来
+                    // 注意这里的判断
+                    this.x = this.x < -this.width ? this.ctx.canvas.width : this.x
+                    break;
+                // 第三排是向右走的小人
+                case 2:
+                    this.x += this.speed;
+                    // 同理,
+                    // 当小人向右走 走出了画布
+                    // 需要从画布的左边再走来
+                    this.x = this.x > this.ctx.canvas.width ? -this.width : this.x;
+                    break;
+                // 第三排的是向上走的小人
+                case 3:
+                    this.y -= this.speed;
+                    // 同理
+                    this.y = this.y < -this.height ? this.ctx.canvas.height : this.y;
+                    break;
+            }
+        }
+    });
+
+    // 暴露接口
+    w.Person = Person;
+}(window))
