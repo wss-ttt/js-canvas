@@ -26,8 +26,9 @@
          * param { y: number } 指定人物绘制的y轴坐标,由用户指定
          * param { renderWidth: number } 人物绘制时的宽,由用户指定
          * param { renderHeight: number } 人物绘制时的高,由用户指定
+         * param { speed: number } 控制小人移动的速度
          * **/
-        function Person(ctx, img, widthFrame, heightFrame, x, y, renderWidth, renderHeight) {
+        function Person(ctx, img, widthFrame, heightFrame, x, y, renderWidth, renderHeight,speed) {
             this.ctx = ctx;
             this.img = img;
             this.widthFrame = widthFrame;
@@ -47,6 +48,9 @@
             this.directionX = 0; // 其实就是x轴的方向
             // 当前行走的方向，默认是第一排的方向
             this.directionY = 0;  // 其实就是y轴的方向
+
+            // 指定小人移动的速度 
+            this.speed = speed || 2;
         }
 
         // 在Person的原型对象上扩充方法
@@ -91,13 +95,13 @@
                 switch (this.directionY) {
                     // 第一排是向下走的小人
                     case 0:
-                        this.y += 2;
+                        this.y += this.speed;
                         // 同理
                         this.y = this.y > this.ctx.canvas.height ? -this.height : this.y;
                         break;
                     // 第二排是向左走的小人
                     case 1:
-                        this.x -= 2;
+                        this.x -= this.speed;
                         // 当小人向左走出画布的时候,
                         // 从画布的右边再走进来
                         // 注意这里的判断
@@ -105,7 +109,7 @@
                         break;
                     // 第三排是向右走的小人
                     case 2:
-                        this.x += 2;
+                        this.x += this.speed;
                         // 同理,
                         // 当小人向右走 走出了画布
                         // 需要从画布的左边再走来
@@ -113,7 +117,7 @@
                         break;
                     // 第三排的是向上走的小人
                     case 3:
-                        this.y -= 2;
+                        this.y -= this.speed;
                         // 同理
                         this.y = this.y < -this.height ? this.ctx.canvas.height : this.y;
                         break;
