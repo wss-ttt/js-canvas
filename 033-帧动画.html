@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="cvs" width="500" height="500"></canvas>
+    <img src="images/NPCrabbitbaby.png" alt="">
+    <script>
+
+        /**
+         * constructor { Person } 人构造函数 
+         * param { img: Image } 绘制的图像
+         * param { widthFrame: number } 图像一排有多少个人
+         * param { heightFrame: number } 图像一列有多少个人
+         * param { x: number } 指定人物绘制的x轴坐标,由用户指定
+         * param { y: number } 指定人物绘制的y轴坐标,由用户指定
+         * param { renderWidth: number } 人物绘制时的宽,由用户指定
+         * param { renderHeight: number } 人物绘制时的高,由用户指定
+         * **/
+        function Person(ctx, img, widthFrame, heightFrame, x, y, renderWidth, renderHeight) {
+            this.ctx = ctx;
+            this.img = img;
+            this.widthFrame = widthFrame;
+            this.heightFrame = heightFrame;
+
+            // 图像绘制时的坐标和大小
+            this.x = x;
+            this.y = y;
+            this.renderWidth = renderWidth;
+            this.renderHeight = renderHeight;
+
+            // 求出一个小人的宽度和高度
+            this.width = img.width / widthFrame;
+            this.height = img.height / heightFrame;
+
+            // 当前绘制某个方向的第几帧
+            this.directionX = 0; // 其实就是x轴的方向
+            // 当前行走的方向，默认是第一排的方向
+            this.directionY = 0;  // 其实就是y轴的方向
+        }
+
+        // 在Person的原型对象上扩充方法
+        extend(Person.prototype, {
+            // 绘制方法
+            draw: function () {
+                this.ctx.drawImage(this.img,
+                    // 裁剪的4个参数
+                    this.directionX * this.width, this.directionY * this.height, this.width, this.height,
+                    // 绘制图像的4个参数(当裁剪的图像绘制到哪个地方去)
+                    this.x, this.y, this.renderWidth, this.renderHeight
+                );
+            },
+            bind: function () {
+                var self = this;
+                // 给document对象绑定事件
+                document.addEventListener('keydown', function (e) {
+                    console.log(e.keyCode);
+                    // 根据案件切换行走方向
+                    switch (e.keyCode) {
+                        // 37: 左箭头
+                        case 37:
+                            self.directionY = 1;
+                            break;
+                        // 38: 上箭头
+                        case 38:
+                            self.directionY = 3;
+                            break;
+                        // 39: 右箭头
+                        case 39:
+                            self.directionY = 2;
+                            break;
+                        // 40: 下箭头
+                        case 40:
+                            self.directionY = 0;
+                            break;
+                    }
+                });
+            }
+        });
+
+        // 混入式继承( copy继承 )
+        function extend(o1, o2) {
+            for (var key in o2) {
+                if (o2.hasOwnProperty(key)) {
+                    o1[key] = o2[key];
+                }
+            }
+        }
+
+        var cvs = document.getElementById('cvs');
+        var ctx = cvs.getContext("2d");
+        var img = document.getElementsByTagName('img')[0];
+        img.onload = function () {
+            // 该图片的宽度是 160,一排有4个小人,所以一个小人的宽度是:40
+            var person = new Person(ctx, img, 4, 4, 50, 50, 40, 40);
+            person.bind();
+            setInterval(function () {
+                // 清除画布
+                ctx.clearRect( 0, 0, cvs.width, cvs.height );
+                person.draw();
+                // x轴方向上,4个小图像移动,然后就形成了动画效果
+                person.directionX = ++person.directionX >= person.widthFrame ? 0 : person.directionX;
+            }, 50);
+        }
+    </script>
+</body>
+
+</html>
