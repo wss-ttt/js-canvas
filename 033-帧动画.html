@@ -92,18 +92,30 @@
                     // 第一排是向下走的小人
                     case 0:
                         this.y += 2;
+                        // 同理
+                        this.y = this.y > this.ctx.canvas.height ? -this.height : this.y;
                         break;
                     // 第二排是向左走的小人
                     case 1:
                         this.x -= 2;
+                        // 当小人向左走出画布的时候,
+                        // 从画布的右边再走进来
+                        // 注意这里的判断
+                        this.x = this.x < -this.width ? this.ctx.canvas.width : this.x
                         break;
                     // 第三排是向右走的小人
                     case 2:
                         this.x += 2;
+                        // 同理,
+                        // 当小人向右走 走出了画布
+                        // 需要从画布的左边再走来
+                        this.x = this.x > this.ctx.canvas.width ? -this.width : this.x;
                         break;
                     // 第三排的是向上走的小人
                     case 3:
                         this.y -= 2;
+                        // 同理
+                        this.y = this.y < -this.height ? this.ctx.canvas.height : this.y;
                         break;
                 }
             }
