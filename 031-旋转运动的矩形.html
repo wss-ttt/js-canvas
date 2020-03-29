@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="cvs" width="500" height="500"></canvas>
+    <script>
+        var cvs = document.getElementById('cvs');
+        var ctx = cvs.getContext("2d");
+        var baseRadin = 0;
+        /**
+         *需求: 
+         * 在(100,100)绘制一个(100,100)的矩形,并且旋转起来
+         * 技术点: 
+         *  1.需要使用定时器,进行运动
+        */
+        setInterval(function () {
+            console.log(1);
+            // 1.防止图形飞走,因为不会不停平移,
+            // .所以保存当前坐标轴的状态
+            ctx.save();
+            // 2.清除画布
+            ctx.clearRect(0, 0, cvs.width, cvs.height);
+            // 3.平移 坐标轴
+            ctx.translate(150, 150);
+            // 4.旋转坐标轴
+            // 每次旋转4度
+            ctx.rotate(baseRadin += Math.PI / 180 * 4);
+            // 5.绘制图形
+            ctx.fillRect(-50, -50, 100, 100);
+            // 6.平移旋转之后,滚动到最初的状态
+            ctx.restore();
+        }, 50);
+    </script>
+</body>
+
+</html>
