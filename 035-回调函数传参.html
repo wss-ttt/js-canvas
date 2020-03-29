@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * 回调函数:没有传参
+         * 
+        */
+        // 这个地方定义了fn
+        // 同时调用了参数,因为参数是一个函数
+        function fn(callback) {
+            callback();  // 注意:这个地方是调用回调函数
+        }
+
+        // 这个地方调用fn
+        // 同时定义了参数是一个函数
+        fn(function () {
+            console.log('a');
+        });
+
+
+        /**
+         * 回调函数: 传递参数 
+         * 
+        */
+        function fn2(callback) {
+            // 注意:这个地方是调用回调函数
+            // 同时给回调函数传递参数 888
+            callback(888); 
+        }
+
+        // 调用函数fn2
+        // 同时定义参数,参数是一个函数,该函数需要接受一个参数
+        fn2(function (param) {
+            console.log(param);
+        })
+    </script>
+</body>
+
+</html>
