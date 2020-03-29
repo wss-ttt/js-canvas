@@ -85,6 +85,27 @@
                             break;
                     }
                 });
+            },
+            // 更新小人下一帧绘制时的数据
+            update: function () {
+                switch (this.directionY) {
+                    // 第一排是向下走的小人
+                    case 0:
+                        this.y += 2;
+                        break;
+                    // 第二排是向左走的小人
+                    case 1:
+                        this.x -= 2;
+                        break;
+                    // 第三排是向右走的小人
+                    case 2:
+                        this.x += 2;
+                        break;
+                    // 第三排的是向上走的小人
+                    case 3:
+                        this.y -= 2;
+                        break;
+                }
             }
         });
 
@@ -106,10 +127,12 @@
             person.bind();
             setInterval(function () {
                 // 清除画布
-                ctx.clearRect( 0, 0, cvs.width, cvs.height );
+                ctx.clearRect(0, 0, cvs.width, cvs.height);
                 person.draw();
                 // x轴方向上,4个小图像移动,然后就形成了动画效果
                 person.directionX = ++person.directionX >= person.widthFrame ? 0 : person.directionX;
+                // 
+                person.update();
             }, 50);
         }
     </script>
