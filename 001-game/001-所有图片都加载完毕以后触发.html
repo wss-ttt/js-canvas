@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 这一种是单个图片加载完毕以后去执行回调函数
+        imgLoaded({
+            'img1': 'images/1.jpg',
+            'img2': 'images/2.jpg',
+            'img3': 'images/3.jpg',
+            'img4': 'images/4.jpg',
+            'img5': 'images/5.jpg',
+        }, function (img) {
+            console.log(img.src);
+        });
+
+        function imgLoaded(imgUrl, fn) {
+            var img;
+            for (var key in imgUrl) {
+                // 创建img标签
+                img = new Image();
+                img.src = imgUrl[key];
+                // 添加onload事件
+                img.onload = function () {
+                    fn(this);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

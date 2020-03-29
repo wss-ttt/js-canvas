@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="cvs" width="500" height="500"></canvas>
+    <script>
+        var cvs = document.getElementById('cvs');
+        var ctx = cvs.getContext("2d");
+        // 这一种是单个图片加载完毕以后去执行回调函数
+        loadImg({
+            'img1': 'images/1.jpg',
+            'img2': 'images/2.jpg',
+            'img3': 'images/3.jpg',
+            'img4': 'images/4.jpg',
+            'img5': 'images/5.jpg',
+        }, function (obj) {
+            ctx.drawImage(obj.img1, 0, 0, 100, 100);
+            ctx.drawImage(obj.img2, 120, 0, 100, 100);
+            ctx.drawImage(obj.img3, 240, 0, 100, 100);
+            ctx.drawImage(obj.img4, 360, 0, 100, 100);
+
+        });
+
+        function loadImg(imgUrl, fn) {
+            var img;
+            // 统计已经加载完毕的图片
+            var loaded = 0;
+            // 统计要加载的图片
+            var imgLen = 0;
+            var imgObj = {};
+            for (var key in imgUrl) {
+                imgLen++;
+                // 创建img标签
+                img = new Image();
+                // src有内容,就会去请求资源
+                img.src = imgUrl[key];
+                imgObj[key] = img;
+                // 添加onload事件
+                img.onload = function () {
+                    loaded++;
+                    // 保证所有的图片都加载完毕了以后,才执行回调函数
+                    if (loaded >= imgLen) {
+                        fn(imgObj);
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
